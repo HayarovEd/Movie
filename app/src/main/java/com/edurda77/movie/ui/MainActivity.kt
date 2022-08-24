@@ -2,40 +2,56 @@ package com.edurda77.movie.ui
 
 import android.content.Intent
 import android.os.Bundle
-import android.widget.AdapterView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContentProviderCompat.requireContext
+import androidx.activity.viewModels
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.edurda77.movie.databinding.ActivityMainBinding
 import com.edurda77.movie.entity.MovieInList
+import com.edurda77.movie.ui.presentation.MainActivityViewModel
 import com.edurda77.movie.ui.presentation.MovieAdapter
-import com.edurda77.movie.utils.TRANSPHER_ID
+import com.edurda77.movie.utils.StateMainActivity
+import com.edurda77.movie.utils.TRANSFER_ID
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
-    private val courseList = mutableListOf<MovieInList>()
+    private val viewModel by viewModels<MainActivityViewModel>()
+    //private val courseList = mutableListOf<MovieInList>()
     private lateinit var binding: ActivityMainBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         binding = ActivityMainBinding.inflate(layoutInflater)
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-        courseList.add(MovieInList(23, "gsgfgfgs1", 10, "12-12-2020", "dddd"))
-        courseList.add(MovieInList(24, "gsgfgfgs2", 20, "12-12-2020", "dddd"))
-        courseList.add(MovieInList(241, "gsgfgfgs3", 30, "12-12-2020", "dddd"))
-        courseList.add(MovieInList(23, "gsgfgfgs4", 10, "12-12-2020", "dddd"))
-        courseList.add(MovieInList(23, "gsgfgfgs5", 40, "12-12-2020", "dddd"))
-        courseList.add(MovieInList(23, "gsgfgfgs6", 50, "12-12-2020", "dddd"))
-        courseList.add(MovieInList(23, "gsgfgfgs7", 100, "12-12-2020", "dddd"))
-        courseList.add(MovieInList(23, "gsgfgfgs8", 0, "12-12-2020", "dddd"))
-        courseList.add(MovieInList(23, "gsgfgfgs9", 30, "12-12-2020", "dddd"))
-        courseList.add(MovieInList(23, "gsgfgfgs10", 17, "12-12-2020", "dddd"))
 
-        initRecyclerView(courseList)
+        viewModel.getDataForShow(1)
+        viewModel.movieData.observe(this) {
+            when (it) {
+                is StateMainActivity.Loading->{
+                    binding.rvMovie.isVisible=true
+                    binding.progressState.isVisible=true
+                }
+                is StateMainActivity.Failure -> {
+                    binding.rvMovie.isVisible = false
+                    binding.progressState.isVisible = false
+                    Toast.makeText(this, it.error, Toast.LENGTH_SHORT).show()
+                }
+                is StateMainActivity.Success->{
+                    binding.rvMovie.isVisible = true
+                    binding.progressState.isVisible = false
+                    initRecyclerView(it.data.movieInList)
+                }
+                is StateMainActivity.Empty->{
+
+                }
+            }
+        }
 
     }
 
-    private fun initRecyclerView(data: MutableList<MovieInList>) {
+    private fun initRecyclerView(data: List<MovieInList>) {
         val recyclerView: RecyclerView = binding.rvMovie
         recyclerView.layoutManager = GridLayoutManager(
             this, 2, GridLayoutManager
@@ -45,7 +61,7 @@ class MainActivity : AppCompatActivity() {
             object : MovieAdapter.OnStateClickListener {
                 override fun onStateClick(moveInList: MovieInList, position: Int) {
                     val intent = Intent(this@MainActivity, MovieActivity::class.java)
-                    intent.putExtra(TRANSPHER_ID, moveInList.id)
+                    intent.putExtra(TRANSFER_ID, moveInList.id)
                     startActivity(intent)
                 }
             }

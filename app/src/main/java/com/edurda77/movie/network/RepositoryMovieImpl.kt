@@ -14,13 +14,13 @@ class RepositoryMovieImpl @Inject constructor(private val apiService: ApiService
 
     override suspend fun getMovieisChoisedForShow(id: Int): MovieIsShow {
         val inputDetails = apiService.getDetailsMovie(id, API_KEY, LANGUAGE)
-        val inputCretits = apiService.getCreditsMovie(id, API_KEY, LANGUAGE)
-        return dataToMovie(inputDetails, inputCretits)
+        val inputCredits = apiService.getCreditsMovie(id, API_KEY, LANGUAGE)
+        return dataToMovie(inputDetails, inputCredits)
     }
 
-    private fun addToList(inputlist: JsonStructureTopMovies): List<MovieInList> {
+    private fun addToList(inputList: JsonStructureTopMovies): List<MovieInList> {
         val list = mutableListOf<MovieInList>()
-        inputlist.results.forEach {
+        inputList.results.forEach {
             list.add(
                 MovieInList(
                     id = it.id,
@@ -36,7 +36,7 @@ class RepositoryMovieImpl @Inject constructor(private val apiService: ApiService
 
     private fun dataToMovie(
         inputDetails: JsonStructureDetailsMovie,
-        inputCretits: JsonStructureCreditsMovie
+        inputCredits: JsonStructureCreditsMovie
     ) = MovieIsShow(
         id = inputDetails.id,
         title = inputDetails.title,
@@ -47,7 +47,7 @@ class RepositoryMovieImpl @Inject constructor(private val apiService: ApiService
         popularity = inputDetails.popularity,
         overview = inputDetails.overview,
         genres = inputDetails.genres,
-        cast = inputCretits.cast
+        cast = inputCredits.cast
     )
 
 }

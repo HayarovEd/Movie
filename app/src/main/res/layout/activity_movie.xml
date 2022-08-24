@@ -79,7 +79,7 @@
         android:layout_marginTop="8dp"
         android:layout_marginStart="8dp"
         android:background="@drawable/shape_ring"
-        android:max="100"
+        android:max="200"
         android:min="0"
         app:layout_constraintStart_toEndOf="@id/posterMovieThis"
         app:layout_constraintTop_toBottomOf="@id/genreMovieThis" />

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_gravity="center"
-    android:layout_margin="5dp"
+    android:layout_margin="8dp"
     app:cardCornerRadius="5dp"
     app:cardElevation="5dp">
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -40,7 +40,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:paddingTop="14dp"
+            android:paddingTop="2dp"
+            android:textColor="@color/md_theme_light_tertiaryContainer"
             android:textAppearance="?android:attr/textAppearanceSmall"
             app:layout_constraintStart_toStartOf="@id/rang"
             app:layout_constraintEnd_toEndOf="@id/rang"
@@ -78,7 +79,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.5" /> />
+            app:layout_constraintGuide_percent="0.5" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline3"

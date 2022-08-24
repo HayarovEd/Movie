@@ -2,4 +2,11 @@
 <resources>
     <string name="title_movie">Title movie</string>
     <string name="date_release">dd-mm-yyyy</string>
+    <string name="to_long">1 h 45 min</string>
+    <string name="genre">genre</string>
+    <string name="User_score">Рейтинг</string>
+    <string name="overview">overView</string>
+    <string name="overview2">Обзор</string>
+    <string name="cast">Актеры</string>
+    <string name="Role">Роль</string>
 </resources>

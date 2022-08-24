@@ -1,7 +1,10 @@
 package com.edurda77.movie.ui
 
+import android.content.Intent
 import android.os.Bundle
+import android.widget.AdapterView
 import android.widget.GridView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.edurda77.movie.databinding.ActivityMainBinding
 import com.edurda77.movie.ui.entity.MovieInList
@@ -29,5 +32,10 @@ class MainActivity : AppCompatActivity() {
 
         val courseAdapter = MovieAdapter(courseList, this@MainActivity)
         courseGRV.adapter = courseAdapter
+        courseGRV.onItemClickListener = AdapterView.OnItemClickListener { _, _, position, _ ->
+            val intent = Intent(this@MainActivity, MovieActivity::class.java)
+            intent.putExtra(String(), courseList[position].id)
+            startActivity(intent)
+        }
     }
 }

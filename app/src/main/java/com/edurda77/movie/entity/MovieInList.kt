@@ -1,4 +1,4 @@
-package com.edurda77.movie.ui.entity
+package com.edurda77.movie.entity
 
 import java.io.Serializable
 

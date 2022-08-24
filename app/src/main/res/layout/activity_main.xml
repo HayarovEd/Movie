@@ -6,17 +6,16 @@
     android:layout_height="match_parent"
     tools:context=".ui.MainActivity">
 
-    <GridView
-        android:id="@+id/grid_view"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvMovie"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:numColumns="auto_fit"
-        android:horizontalSpacing="8dp"
-        android:verticalSpacing="8dp"
-        android:stretchMode="columnWidth"
-        app:layout_constraintTop_toTopOf="parent"
+        android:layout_height="wrap_content"
+        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+        app:spanCount="2"
+        android:orientation="vertical"
         app:layout_constraintStart_toStartOf="parent"
-        tools:ignore="UselessLeaf" />
+        app:layout_constraintTop_toTopOf="parent"/>
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

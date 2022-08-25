@@ -22,7 +22,6 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
     private val viewModel by viewModels<MainActivityViewModel>()
-    //private val courseList = mutableListOf<MovieInList>()
     private lateinit var binding: ActivityMainBinding
     private lateinit var movieAdapter: MovieAdapter
 
@@ -35,7 +34,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-        //viewModel.getDataForShow(1)
         viewModel.movieData.observe(this) {
             when (it) {
                 is StateMainActivity.Loading->{

@@ -18,7 +18,7 @@ class RepositoryMovieImpl @Inject constructor(private val apiService: ApiService
         return dataToMovie(inputDetails, inputCredits)
     }
 
-    private fun addToList(inputList: JsonStructureTopMovies): List<MovieInList> {
+    private fun addToList(inputList: JsonStructureTopMovies): MutableList<MovieInList> {
         val list = mutableListOf<MovieInList>()
         inputList.results.forEach {
             list.add(
